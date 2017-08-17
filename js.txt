@@ -1,0 +1,12 @@
+window.addEventListener("scroll", function (){
+        let headerHeight = document.getElementsByTagName('header')[0].offsetHeight;
+        let scroll = window.pageYOffset || document.documentElement.scrollTop;
+        let clickScroll = document.getElementsByClassName('scroll')[0];
+
+        if (scroll >= headerHeight) {
+
+        } else {
+
+        }
+
+    });
