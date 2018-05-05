@@ -10,3 +10,98 @@ window.addEventListener("scroll", function (){
         }
 
     });
+====== dropdown
+    <div class="select-car">
+	<button class="offset-left selected-car">
+		<span class="text">BMW</span>
+		<svg class="arrow-down-select" width="25px" height="25px" viewBox="0 0 306 306" xmlns="http://www.w3.org/2000/svg">
+			<path d="M270.3 58.65L153 175.95 35.7 58.65 0 94.35l153 153 153-153z"></path>
+		</svg>
+	</button>
+	<ul class="custom-select">
+		<li><a class="offset-left link-select" href="#all">Всі</a></li>
+		<li><a class="offset-left link-select" href="#Porshe">Porshe</a></li>
+		<li><a class="offset-left link-select" href="#Hummer">Hummer</a></li>
+		<li><a class="offset-left link-select" href="#Bentley">Bentley</a></li>
+		<li><a class="offset-left link-select" href="#BMW">BMW</a></li>
+	</ul>
+ </div>
+(function() {
+        const container = document.querySelectorAll(".select-car");
+        container.forEach(function(item) {
+            const button = item.querySelector(".selected-car");
+            const text = item.querySelector(".text");
+            const list = item.querySelector(".custom-select");
+            button.onclick = btnClick(list, button);
+            list.onclick = listClick(text, button, list);
+        })
+        function btnClick(list, btn) {
+            return () => {
+                list.classList.toggle("active");
+                btn.classList.toggle("active");
+            }
+        }
+        function listClick(text, button, list) {
+            return (event) => {
+                event.preventDefault();
+                const target = event.target;
+                if (target.classList.contains("link-select")) {
+                    text.innerText = target.innerText;
+                    button.classList.remove("active");
+                    list.classList.remove("active");
+                }
+            }
+        }
+    })();
+
+
+.select-car {
+  position: relative;
+  margin-left: auto;
+  margin-right: 40px;
+  color: #c9c9c9;
+  font-size: 24px;
+  width: 215px;
+}
+
+.selected-car {
+  font-family: Roboto-Medium, sans-serif;
+  border: none;
+  background-color: transparent;
+  color: #c9c9c9;
+  font-size: 24px;
+}
+
+.selected-car.active .arrow-down-select {
+     transform: rotate(180deg);
+}
+
+.link-select {
+  transition: all 0.3s ease-in;
+  font-family: Roboto-Light, sans-serif;
+  padding: 15px 0;
+  display: block;
+}
+
+.link-select:hover, .car-list .link-select.active {
+  background-color: #2f3139;
+  color: #fff;
+}
+
+.custom-select {
+  box-shadow: 0 0 2px 0px #2d2f39;
+  position: absolute;
+  top: 56px;
+  left: 0;
+  right: 0;
+  background-color: #383a41;
+  display: none;
+}
+.custom-select.active {
+  display: block;
+}
+.custom-select .arrow-down-select {
+  width: 25px;
+  height: 15px;
+  fill: #c9c9c9;
+}
